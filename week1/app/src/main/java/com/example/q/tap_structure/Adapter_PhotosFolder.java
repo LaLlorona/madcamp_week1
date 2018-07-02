@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-
 import java.util.ArrayList;
 
 
@@ -24,6 +23,7 @@ public class Adapter_PhotosFolder extends ArrayAdapter<Model_images> {
     Context context;
     ViewHolder viewHolder;
     ArrayList<Model_images> al_menu = new ArrayList<>();
+
 
 
     public Adapter_PhotosFolder(Context context, ArrayList<Model_images> al_menu) {

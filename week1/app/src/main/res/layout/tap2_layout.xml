@@ -30,7 +30,7 @@
         android:text="tap3" />
 
     <GridView
-        android:id="@+id/imageView1"
+        android:id="@+id/gv_folder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentEnd="true"
