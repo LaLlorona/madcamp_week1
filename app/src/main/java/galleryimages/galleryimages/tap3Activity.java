@@ -21,6 +21,7 @@ public class tap3Activity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent myIntent = new Intent(getApplicationContext(),tap1Activity.class);
                 startActivity(myIntent);
+                overridePendingTransition(R.anim.anim_slide_in_left,R.anim.anim_slide_out_right);
                 finish();
 
 
@@ -32,6 +33,7 @@ public class tap3Activity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent myIntent = new Intent(getApplicationContext(),MainActivity.class);
                 startActivity(myIntent);
+                overridePendingTransition(R.anim.anim_slide_in_left,R.anim.anim_slide_out_right);
                 finish();
             }
         });

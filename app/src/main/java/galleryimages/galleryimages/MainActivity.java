@@ -33,9 +33,6 @@ public class MainActivity extends AppCompatActivity {
         Button tap1 = (Button) findViewById(R.id.act2_tap1_btn);
         Button tap2 = (Button) findViewById(R.id.act2_tap2_btn);
         Button tap3 = (Button) findViewById(R.id.act2_tap3_btn);
-        int PERMISSION_ALL = 1;
-        String[] PERMISSIONS = {Manifest.permission.READ_CONTACTS};
-        ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_ALL);
 
 
 
@@ -45,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent myIntent = new Intent(getApplicationContext(), tap1Activity.class);
                 startActivity(myIntent);
+                overridePendingTransition(R.anim.anim_slide_in_left,R.anim.anim_slide_out_right);
                 finish();
 
 
@@ -56,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent myIntent = new Intent(getApplicationContext(), tap3Activity.class);
                 startActivity(myIntent);
+                overridePendingTransition(R.anim.anim_slide_in_right,R.anim.anim_slide_out_left);
                 finish();
 
 
@@ -73,8 +72,22 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        fn_imagespath();
+        if ((ContextCompat.checkSelfPermission(getApplicationContext(),
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) && (ContextCompat.checkSelfPermission(getApplicationContext(),
+                Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)) {
+            if ((ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) && (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this,
+                    Manifest.permission.READ_EXTERNAL_STORAGE))) {
 
+            } else {
+                ActivityCompat.requestPermissions(MainActivity.this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE},
+                        REQUEST_PERMISSIONS);
+            }
+        }else {
+            Log.e("Else","Else");
+            fn_imagespath();
+        }
 
 
 

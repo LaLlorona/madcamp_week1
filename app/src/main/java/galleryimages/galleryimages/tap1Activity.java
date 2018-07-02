@@ -52,6 +52,8 @@ public class tap1Activity extends AppCompatActivity {
         Cursor phones = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,null,null, null);
         String aNameFromContacts[] = new String[phones.getCount()];
         String aNumberFromContacts[] = new String[phones.getCount()];
+        String contacts[] = new String[phones.getCount()];
+
         int i = 0;
         int nameFieldColumnIndex = phones.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
         int numberFieldColumnIndex = phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
@@ -64,11 +66,13 @@ public class tap1Activity extends AppCompatActivity {
 
             String number = phones.getString(numberFieldColumnIndex);
             aNumberFromContacts[i] =    number ;
+
+            contacts[i] = contactName + " " + number;
             i++;
         }
 
         phones.close();
-        listItem = aNumberFromContacts;
+        listItem = contacts;
         //listItem = getResources().getStringArray(R.array.array_technology);
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, android.R.id.text1, listItem);
@@ -89,6 +93,7 @@ public class tap1Activity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent myIntent = new Intent(getApplicationContext(),MainActivity.class);
                 startActivity(myIntent);
+                overridePendingTransition(R.anim.anim_slide_in_right,R.anim.anim_slide_out_left);
                 finish();
             }
         });
@@ -97,6 +102,7 @@ public class tap1Activity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent myIntent = new Intent(getApplicationContext(),tap3Activity.class);
                 startActivity(myIntent);
+                overridePendingTransition(R.anim.anim_slide_in_right,R.anim.anim_slide_out_left);
                 finish();
             }
         });
