@@ -2,32 +2,33 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp" >
+    android:layout_height="match_parent" >
 
     <Button
         android:id="@+id/act3_tap1_btn"
-        android:layout_width="wrap_content"
+        android:layout_width="123dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:text="tap1" />
+        android:text="contact"
+        android:textColor="#ffffff" />
 
     <Button
         android:id="@+id/act3_tap2_btn"
-        android:layout_width="wrap_content"
+        android:layout_width="123dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="tap2" />
+        android:text="gallery"
+        android:textColor="#ffffff" />
 
     <Button
         android:id="@+id/act3_tap3_btn"
-        android:layout_width="wrap_content"
+        android:layout_width="123dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
+<<<<<<< HEAD
         android:text="tap3" />
 
     <TextView
@@ -60,4 +61,8 @@
         android:text="TextView" />
 
 
+=======
+        android:text="drawing"
+        android:textColor="#ffffff" />
+>>>>>>> 0ea447ec5b9b1f70b4d50db264b7c13f281991b8
 </RelativeLayout>
