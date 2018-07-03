@@ -1,5 +1,6 @@
 package galleryimages.galleryimages;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -8,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +18,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.cooltechworks.views.ScratchImageView;
+
 
 import java.util.List;
 
@@ -25,8 +31,10 @@ public class tap3Activity extends AppCompatActivity {
     private Bitmap bitmap;
     private TextView color_number;
     private TextView pos;
+    private ScratchImageView scratchImageView;
 
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,12 +68,22 @@ public class tap3Activity extends AppCompatActivity {
             }
         });
 
+        scratchImageView = (ScratchImageView) findViewById(R.id.sample_image);
+        scratchImageView.setRevealListener(new ScratchImageView.IRevealListener() {
+            @Override
+            public void onRevealed(ScratchImageView scratchImageView) {
+                Log.i("Main", "onRevealed");
+            }
+        });
+
         /*
         BitMapPractice myView2 = new BitMapPractice (this);
         setContentView(myView2);
         PaintBoard myView = new PaintBoard (this);
         setContentView(myView);
         */
+
+        /*
         imageView = (ImageView) findViewById(R.id.face);
         imageView.setDrawingCacheEnabled(true);
         imageView.buildDrawingCache(true);
@@ -89,6 +107,8 @@ public class tap3Activity extends AppCompatActivity {
                 return true;
             }
         });
+        */
+
 
 
 
