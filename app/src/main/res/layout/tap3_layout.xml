@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="16dp"
@@ -28,4 +29,35 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
         android:text="tap3" />
+
+    <TextView
+        android:id="@+id/color_scheme"
+        android:layout_width="355dp"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/act3_tap1_btn"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="-267dp"
+        android:layout_marginTop="60dp"
+        android:text="TextView" />
+
+    <ImageView
+        android:id="@+id/face"
+        android:layout_width="wrap_content"
+        android:layout_height="411dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="28dp"
+        app:srcCompat="@drawable/btf" />
+
+    <TextView
+        android:id="@+id/position"
+        android:layout_width="348dp"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/act3_tap1_btn"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="-260dp"
+        android:layout_marginTop="97dp"
+        android:text="TextView" />
+
+
 </RelativeLayout>
