@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -33,6 +34,8 @@ public class tap1Activity extends AppCompatActivity {
         return true;
     }
 
+    private static final int REQUEST_PERMISSIONS = 100;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,70 +45,82 @@ public class tap1Activity extends AppCompatActivity {
         Button tap2 = (Button)findViewById(R.id.act1_tap2_btn);
         Button tap3 = (Button)findViewById(R.id.act1_tap3_btn);
 
-        int PERMISSION_ALL = 1;
-        String[] PERMISSIONS = {Manifest.permission.READ_CONTACTS};
-        ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_ALL);
+        if (ContextCompat.checkSelfPermission(getApplicationContext(),
+                Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(tap1Activity.this,
+                    Manifest.permission.READ_CONTACTS)) {
 
-        listView = (ListView) findViewById(R.id.listView);
-        textView = (TextView) findViewById(R.id.textView);
+            } else {
+                ActivityCompat.requestPermissions(tap1Activity.this,
+                        new String[]{Manifest.permission.READ_CONTACTS},
+                        REQUEST_PERMISSIONS);
+            }
+        }else {
 
-        Cursor phones = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,null,null, null);
-        String aNameFromContacts[] = new String[phones.getCount()];
-        String aNumberFromContacts[] = new String[phones.getCount()];
-        String contacts[] = new String[phones.getCount()];
+            int PERMISSION_ALL = 1;
+            String[] PERMISSIONS = {Manifest.permission.READ_CONTACTS};
+            ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_ALL);
 
-        int i = 0;
-        int nameFieldColumnIndex = phones.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
-        int numberFieldColumnIndex = phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
+            listView = (ListView) findViewById(R.id.listView);
+            textView = (TextView) findViewById(R.id.textView);
+
+            Cursor phones = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, null);
+            String aNameFromContacts[] = new String[phones.getCount()];
+            String aNumberFromContacts[] = new String[phones.getCount()];
+            String contacts[] = new String[phones.getCount()];
+
+            int i = 0;
+            int nameFieldColumnIndex = phones.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
+            int numberFieldColumnIndex = phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
 
 
-        while (phones.moveToNext())
-        {
-            String contactName = phones.getString(nameFieldColumnIndex);
-            aNameFromContacts[i] =    contactName ;
+            while (phones.moveToNext()) {
+                String contactName = phones.getString(nameFieldColumnIndex);
+                aNameFromContacts[i] = contactName;
 
-            String number = phones.getString(numberFieldColumnIndex);
-            aNumberFromContacts[i] =    number ;
+                String number = phones.getString(numberFieldColumnIndex);
+                aNumberFromContacts[i] = number;
 
-            contacts[i] = contactName + " " + number;
-            i++;
+                contacts[i] = contactName + " " + number;
+                i++;
+            }
+
+            phones.close();
+            listItem = contacts;
+            //listItem = getResources().getStringArray(R.array.array_technology);
+            final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                    android.R.layout.simple_list_item_1, android.R.id.text1, listItem);
+            listView.setAdapter(adapter);
+
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                    // TODO Auto-generated method stub
+                    String value = adapter.getItem(position);
+                    Toast.makeText(getApplicationContext(), value, Toast.LENGTH_SHORT).show();
+
+                }
+            });
+
+            tap2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(myIntent);
+                    overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+                    finish();
+                }
+            });
+            tap3.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent myIntent = new Intent(getApplicationContext(), tap3Activity.class);
+                    startActivity(myIntent);
+                    overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+                    finish();
+                }
+            });
         }
-
-        phones.close();
-        listItem = contacts;
-        //listItem = getResources().getStringArray(R.array.array_technology);
-        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, android.R.id.text1, listItem);
-        listView.setAdapter(adapter);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                // TODO Auto-generated method stub
-                String value = adapter.getItem(position);
-                Toast.makeText(getApplicationContext(), value, Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-        tap2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent myIntent = new Intent(getApplicationContext(),MainActivity.class);
-                startActivity(myIntent);
-                overridePendingTransition(R.anim.anim_slide_in_right,R.anim.anim_slide_out_left);
-                finish();
-            }
-        });
-        tap3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent myIntent = new Intent(getApplicationContext(),tap3Activity.class);
-                startActivity(myIntent);
-                overridePendingTransition(R.anim.anim_slide_in_right,R.anim.anim_slide_out_left);
-                finish();
-            }
-        });
     }
 }
 
