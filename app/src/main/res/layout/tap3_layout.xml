@@ -38,7 +38,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/button2"
         android:layout_marginTop="-67dp"
-        android:text="Click Here For PICK image from Gallery TO CROP" />
+        android:text="Open Gallery" />
 
     <Button
         android:id="@+id/button2"
@@ -47,16 +47,26 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="67dp"
-        android:text="Click Here For CLICK image from Camera TO CROP" />
+        android:text="Take Photo" />
 
     <com.cooltechworks.views.ScratchImageView
         android:id="@+id/sample_image"
-        android:layout_width="250dp"
+        android:layout_width="301dp"
+        android:layout_height="325dp"
+        android:layout_alignTop="@+id/called_image"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/white"
+        android:src='@drawable/pringles' />
+
+    <com.cooltechworks.views.ScratchImageView
+        android:id="@+id/called_image"
+        android:layout_width="300dp"
         android:layout_height="325dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="63dp"
-        android:background="@android:color/white" />
+        android:layout_marginTop="81dp"
+        android:background="@android:color/white"
+        android:visibility="invisible" />
 
 
 </RelativeLayout>

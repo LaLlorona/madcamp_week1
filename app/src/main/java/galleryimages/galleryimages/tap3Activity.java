@@ -33,6 +33,7 @@ public class tap3Activity extends AppCompatActivity {
     private TextView color_number;
     private TextView pos;
     private ScratchImageView scratchImageView;
+    private ScratchImageView opnedImageview;
     Button buttonCamera, buttonGallery ;
     File file;
     Uri uri;
@@ -74,7 +75,15 @@ public class tap3Activity extends AppCompatActivity {
             }
         });
 
-        scratchImageView = (ScratchImageView) findViewById(R.id.sample_image);
+        opnedImageview = (ScratchImageView) findViewById(R.id.called_image); //assign sample_image to scratchImageview
+        opnedImageview.setRevealListener(new ScratchImageView.IRevealListener() {
+            @Override
+            public void onRevealed(ScratchImageView scratchImageView) {
+                Log.i("Main", "onRevealed");
+            }
+        });
+
+        scratchImageView = (ScratchImageView) findViewById(R.id.sample_image); //assign sample_image to scratchImageview
         scratchImageView.setRevealListener(new ScratchImageView.IRevealListener() {
             @Override
             public void onRevealed(ScratchImageView scratchImageView) {
@@ -154,7 +163,14 @@ public class tap3Activity extends AppCompatActivity {
 
                 Bitmap bitmap = bundle.getParcelable("data");
 
-                scratchImageView.setImageBitmap(bitmap);
+                opnedImageview.setVisibility(View.VISIBLE);
+
+
+                opnedImageview.setImageBitmap(bitmap);
+
+
+
+                //put bitmap into a current picture
 
             }
         }
