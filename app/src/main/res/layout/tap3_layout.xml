@@ -56,7 +56,7 @@
         android:layout_alignTop="@+id/called_image"
         android:layout_centerHorizontal="true"
         android:background="@android:color/white"
-        android:src='@drawable/pringles' />
+        android:src='@drawable/face' />
 
     <com.cooltechworks.views.ScratchImageView
         android:id="@+id/called_image"
