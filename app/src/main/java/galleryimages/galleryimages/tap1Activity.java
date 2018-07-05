@@ -90,17 +90,17 @@ public class tap1Activity extends AppCompatActivity {
             myadapter = new HumanAdpter(getApplicationContext(),R.layout.mylist, h_info_list);
             listView.setAdapter(myadapter);
 
-            /*
+
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                     // TODO Auto-generated method stub
-                    String value = adapter.getItem(position);
+                    String value = myadapter.data.get(position).gender;
                     Toast.makeText(getApplicationContext(), value, Toast.LENGTH_SHORT).show();
 
                 }
             });
-            */
+
 
             tap2.setOnClickListener(new View.OnClickListener() {
                 @Override

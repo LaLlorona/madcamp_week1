@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class HumanAdpter extends BaseAdapter {
     private Context mContext = null;
     private int layout = 0;
-    private ArrayList<Human> data = null;
+    public ArrayList<Human> data = null;
     private LayoutInflater inflater = null;
 
     public HumanAdpter(Context c, int l, ArrayList<Human> d) {
