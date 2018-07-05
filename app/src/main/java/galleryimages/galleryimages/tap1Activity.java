@@ -18,11 +18,17 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
 
 public class tap1Activity extends AppCompatActivity {
     ListView listView;
     TextView textView;
     String[] listItem;
+    ArrayList<Human> h_info_list;
+    HumanAdpter myadapter;
 
     private static boolean hasPermissions(Context context, String... permissions) {
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && context != null && permissions != null) {
@@ -61,9 +67,8 @@ public class tap1Activity extends AppCompatActivity {
             String[] PERMISSIONS = {Manifest.permission.READ_CONTACTS};
             ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_ALL);
 
-            listView = (ListView) findViewById(R.id.listView);
-            textView = (TextView) findViewById(R.id.textView);
 
+            listView = (ListView) findViewById(R.id.listView);
             Cursor phones = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, null);
             String aNameFromContacts[] = new String[phones.getCount()];
             String aNumberFromContacts[] = new String[phones.getCount()];
@@ -73,25 +78,19 @@ public class tap1Activity extends AppCompatActivity {
             int nameFieldColumnIndex = phones.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
             int numberFieldColumnIndex = phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
 
+            h_info_list = new ArrayList<Human>();
 
             while (phones.moveToNext()) {
-                String contactName = phones.getString(nameFieldColumnIndex);
-                aNameFromContacts[i] = contactName;
-
-                String number = phones.getString(numberFieldColumnIndex);
-                aNumberFromContacts[i] = number;
-
-                contacts[i] = contactName + " " + number;
-                i++;
+                Human newHuman = new Human(phones.getString(nameFieldColumnIndex), phones.getString(numberFieldColumnIndex), BitmapFactory.decodeResource(getResources(), R.drawable.contact));
+                h_info_list.add(newHuman);
             }
 
             phones.close();
-            listItem = contacts;
-            //listItem = getResources().getStringArray(R.array.array_technology);
-            final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                    android.R.layout.simple_list_item_1, android.R.id.text1, listItem);
-            listView.setAdapter(adapter);
 
+            myadapter = new HumanAdpter(getApplicationContext(),R.layout.mylist, h_info_list);
+            listView.setAdapter(myadapter);
+
+            /*
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
@@ -101,6 +100,7 @@ public class tap1Activity extends AppCompatActivity {
 
                 }
             });
+            */
 
             tap2.setOnClickListener(new View.OnClickListener() {
                 @Override
