@@ -168,6 +168,8 @@ public class tap3Activity extends AppCompatActivity {
 
                 opnedImageview.setImageBitmap(bitmap);
 
+                scratchImageView.setImageBitmap(bitmap);
+
 
 
                 //put bitmap into a current picture
